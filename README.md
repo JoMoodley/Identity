@@ -2,7 +2,7 @@
 
 This project is a demonstration of self-sovereign identity verification for funeral insurance. 
 
-The use case consists of four entities: an insurance company, a customer, a relative of the customer and a government. The insurer has two departments, Youth Markets and Family Markets. Youth Markets offers a Single Funeral Plan for the customer. Family Markets offers a Family Funeral Plan for the customer and his dependent relative. [Self-sovereign identity](https://sovrin.org/wp-content/uploads/2018/03/The-Inevitable-Rise-of-Self-Sovereign-Identity.pdf) is the concept of a decentralized identity in which the customer controls his identity information and how it is shared. This can be done with claims created by the customer and verified by government that the customer has certain attributes. The customer can then share claims with the insurer to acquire their products and doesn’t need to share actual data. The government and insurer are reliable parties that can verify claims. Blockchains such as Ethereum can provide the technology to enable this type of identity system and decentralized applications can be built that connects the user to the network.
+The use case consists of four entities: an insurance company, a customer, a relative of the customer and a government. The insurer has two departments, Youth Markets and Family Markets. Youth Markets offers a Single Funeral Plan for the customer. Family Markets offers a Family Funeral Plan for the customer and his dependent relative. [Self-sovereign identity](https://sovrin.org/wp-content/uploads/2018/03/The-Inevitable-Rise-of-Self-Sovereign-Identity.pdf) is the concept of a decentralized identity in which the customer controls his identity information and how it is shared. This can be done with claims created by the customer and verified by government that the customer has certain attributes. The customer can then share claims with the insurer to acquire their products and doesn’t need to share actual data. The government and insurer are reliable parties that can verify claims. Blockchains such as [Ethereum](http://www.ethdocs.org/en/latest/) can provide the technology to enable this type of identity system and decentralized applications can be built that connects the user to the network.
 
 This use case is not based on any particular organization.
 
@@ -13,7 +13,7 @@ Ethereum Solidity smart contracts, HTML and Bootstrap interface, JavaScript appl
 
 ### Tools used
 [Truffle](https://truffleframework.com/truffle) - A framework to develop, test and deploy smart contracts.  
-[Ganache](https://truffleframework.com/ganache) – A local ethereum node and ledger. Provides accounts for testing that have ether, public addresses and private keys.  
+[Ganache](https://truffleframework.com/ganache) – A local ethereum node and ledger. Provides accounts for development that have ether, public addresses and private keys.  
 [MetaMask](https://metamask.io/) – A browser-based wallet account to connect to the system from the application.  
 [web3.js](https://web3js.readthedocs.io/en/1.0/index.html), [node.js](https://nodejs.org/en/) – JavaScript libraries.
 
