@@ -11,7 +11,7 @@ This project is licensed under the terms of the MIT license.
 ### Contents of the system
 Ethereum Solidity smart contracts, HTML and Bootstrap interface, JavaScript application.
 
-### Tools used
+### Tools
 [Truffle](https://truffleframework.com/truffle) - A framework to develop, test and deploy smart contracts.  
 [Ganache](https://truffleframework.com/ganache) – A local ethereum node and ledger. Provides accounts for development that have ether, public addresses and private keys.  
 [MetaMask](https://metamask.io/) – A browser-based wallet account to connect to the system from the application.  
