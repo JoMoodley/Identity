@@ -1,0 +1,493 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <!-- For compatibility with older IE versions. -->
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Identity Demo</title>
+
+  <!-- Bootstrap style -->
+  <link rel="stylesheet" href="css/bootstrap.min.css">
+
+  <!-- App style -->
+  <link rel="stylesheet" href="css/app.css">
+</head>
+
+<body>
+
+  <div class="jumbotron text-center">
+    <h2>Self-Sovereign Identity Demo for Funeral Insurance</h2>
+  </div>
+
+  <!-- Set up the system. Create identities. -->
+  <div id="setup" class="container-fluid">
+    <h3 class="text-center">Set up</h3><br/>
+    <p id="identityCount" class="text-center">Identity count: </p><br/>
+    <div class="row">
+      <div class="col-md-12 text-center">
+        <p>
+          <button type="button" class="btn btn-primary btn-lg" onclick="App.register(1); return false;">Create identity -
+              Government</button>
+          <span class="sizer"></span>
+          <a href="https://www.glyphicons.com/"><span class="glyphicon glyphicon-arrow-right sizer"></span></a>
+          <span class="sizer"></span>
+          <button type="button" class="btn btn-primary btn-lg" onclick="App.register(2); return false;">Create identity -
+              Insurer</button>
+          <span class="sizer"></span>
+          <span class="glyphicon glyphicon-arrow-right sizer"></span>
+          <span class="sizer"></span>
+          <button type="button" class="btn btn-primary btn-lg" onclick="App.register(3); return false;">Create identity -
+              Customer</button>
+          <span class="sizer"></span>
+          <span class="glyphicon glyphicon-arrow-right sizer"></span>
+          <span class="sizer"></span>
+          <button type="button" class="btn btn-primary btn-lg" onclick="App.register(4); return false;">Create identity -
+              Relative</button>
+        </p>
+      </div>
+    </div><br/>
+  </div>
+
+  <!-- Display provider services. -->
+  <div id="services" class="container-fluid">
+    <h3 class="text-center">Provider services</h3><br/>
+    <div class="row">
+      <div class="col-md-2"></div>
+      <div class="col-md-8 well">
+        <table class="table">
+          <thead>
+            <tr>
+              <th>Provider ID</th>
+              <th>Provider name</th>
+              <th>Service</th>
+              <th>Contact</th>
+            </tr>
+          </thead>
+          <tbody id="servicesTable">
+          </tbody>
+        </table>
+      </div>
+      <div class="col-md-2"></div>
+    </div><br/>
+  </div>
+
+  <!-- Display account information. -->
+  <div id="account" class="container-fluid">
+    <h4 id="accountName">Logged in as: </h4><br/>
+    <p id="accountAddress">Account ID: </p>
+  </div>
+
+  <!-- Customer section starts. -->
+  <div id="customer" class="container-fluid">
+    <h4>Claims</h4><br/>
+
+    <div class="row">
+      <div class="col-md-12">
+        <table class="table">
+          <thead>
+            <tr>
+              <th>No.</th>
+              <th>Description</th>
+              <th>Expiry date</th>
+              <th>Verified</th>
+              <th>Verifier name</th>
+              <th>Verifier ID</th>
+              <th>Data ID</th>
+            </tr>
+          </thead>
+          <tbody id="claimsTable">
+          </tbody>
+        </table>
+      </div>
+    </div><br/><br/><br/>
+
+    <div class="row">
+      <div class="col-md-1"></div>
+      <div class="col-md-11">
+        <p>
+          <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#formID">
+            Create claim - ID</button>
+          <span class="sizer"></span>
+          <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#formAddress">
+            Create claim - Address</button>
+          <span class="sizer"></span>
+          <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#formAge">
+            Create claim - Age</button>
+        </p>
+      </div>
+    </div><br/><br/>
+
+    <br/>
+    <h4>Relationship - Insurer</h4><br/><br/>
+
+    <div class="row">
+      <div class="col-md-1"></div>
+      <div class="col-md-2">
+        <button type="button" class="btn btn-primary" onclick="App.customerSignUp(); return false;">Sign up 
+          as customer</button>
+      </div>
+      <div class="col-md-9">
+        <form class="form-inline">
+          <div class="form-group">
+            <label for="dependent">Enter dependent ID: </label>
+            <input type="text" class="form-control" id="dependent" name="dependent">
+          </div>
+          <button type="button" class="btn btn-primary" onclick="App.customerAddDependent(); return false;">Add 
+            dependent</button>
+        </form>
+      </div>
+    </div><br/><br/><br/>
+
+    <div class="row">
+      <div class="col-md-1"></div>
+      <div class="col-md-11">
+        <form class="form-inline">
+          <div class="form-group">
+            <label for="claimNum">Enter claim no.: </label>
+            <input type="number" class="form-control" id="claimNum" name="claimNum">
+          </div>
+          <button type="button" class="btn btn-primary" onclick="App.customerShareClaim(); return false;">Share 
+            claim</button>
+        </form>
+      </div>
+    </div><br/>
+  </div>
+  <!-- Customer section ends. -->
+
+  <!-- Modal form to create claim for proof of ID. -->
+  <div id="formID" class="modal fade" role="dialog">
+    <div class="modal-dialog">
+      <div class="modal-content">
+        <div class="modal-header">
+          <button type="button" class="close" data-dismiss="modal">&times;</button>
+          <h4 class="modal-title">Create claim - ID</h4>
+        </div>
+        <div class="modal-body">
+          <form>
+            <div class="form-group">
+              <label for="idno">ID number: </label>
+              <input type="number" class="form-control" id="idno" name="idno" value=9502010000000>
+            </div>
+            <div class="form-group">
+              <label for="name">Name: </label>
+              <input type="text" class="form-control" id="name" name="name" value="John Doe">
+            </div>
+            <div class="form-group">
+              <label for="dob">Date of birth: </label>
+              <input type="number" class="form-control" id="dob" name="dob" value=19950201>
+            </div>
+          </form>
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-success" data-dismiss="modal" 
+            onclick="App.customerCreateClaimID(); return false;">Create and verify</button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Modal form to create claim for proof of address. -->
+  <div id="formAddress" class="modal fade" role="dialog">
+    <div class="modal-dialog">
+      <div class="modal-content">
+        <div class="modal-header">
+          <button type="button" class="close" data-dismiss="modal">&times;</button>
+          <h4 class="modal-title">Create claim - Address</h4>
+        </div>
+        <div class="modal-body">
+          <form>
+            <div class="form-group">
+              <label for="line1">Line 1: </label>
+              <input type="text" class="form-control" id="line1" name="line1" value="1 Random Complex">
+            </div>
+            <div class="form-group">
+              <label for="line2">Line 2: </label>
+              <input type="text" class="form-control" id="line2" name="line2" value="1 Random Road">
+            </div>
+            <div class="form-group">
+              <label for="town">Town: </label>
+              <input type="text" class="form-control" id="town" name="town" value="Random Town">
+            </div>
+            <div class="form-group">
+              <label for="country">Country: </label>
+              <input type="text" class="form-control" id="country" name="country" value="South Africa">
+            </div>
+            <div class="form-group">
+              <label for="pos">Postal code: </label>
+              <input type="number" class="form-control" id="pos" name="pos" value=1000>
+            </div>
+            <div class="form-group">
+              <label for="expiry">Expiry date: </label>
+              <input type="number" class="form-control" id="expiry" name="expiry" value=20190430>
+            </div>
+          </form>
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-success" data-dismiss="modal" 
+            onclick="App.customerCreateClaimAddress(); return false;">Create and verify</button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Modal form to create claim for proof of age. -->
+  <div id="formAge" class="modal fade" role="dialog">
+    <div class="modal-dialog">
+      <div class="modal-content">
+        <div class="modal-header">
+          <button type="button" class="close" data-dismiss="modal">&times;</button>
+          <h4 class="modal-title">Create claim - Age</h4>
+        </div>
+        <div class="modal-body">
+          <form>
+            <div class="form-group">
+              <label for="dob2">Date of birth: </label>
+              <input type="number" class="form-control" id="dob2" name="dob2" value=19950201>
+            </div>
+          </form>
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-success" data-dismiss="modal" 
+            onclick="App.customerCreateClaimAge(); return false;">Create and verify</button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Government section starts. -->
+  <div id="government" class="container-fluid">
+    <h4>Verification requests</h4><br/>
+
+    <div class="row">
+      <div class="col-md-12">
+        <table class="table">
+          <thead>
+            <tr>
+              <th>No.</th>
+              <th>Requestor</th>
+              <th>Description</th>
+              <th>Expiry date</th>
+              <th>Verified</th>
+              <th>Verifier name</th>
+              <th>Verifier ID</th>
+              <th>Data ID</th>
+            </tr>
+          </thead>
+          <tbody id="verificationsTable">
+          </tbody>
+        </table>
+      </div>
+    </div><br/><br/><br/>
+
+    <div class="row">
+      <div class="col-md-1"></div>
+      <div class="col-md-11">
+        <form class="form-inline">
+          <div class="form-group">
+            <label for="verifNum">Enter request no.: </label>
+            <input type="number" class="form-control" id="verifNum" name="verifNum">
+          </div>
+          <button type="button" class="btn btn-primary" onclick="App.govVerifyClaim(); return false;">Verify</button>
+        </form>
+      </div>
+    </div><br/>
+  </div>
+  <!-- Government section ends. -->
+
+  <!-- Insurer section starts. -->
+  <div id="insurer" class="container-fluid">
+    <h4>Customers</h4><br />
+  
+    <div class="row">
+      <div class="col-md-2"></div>
+      <div class="col-md-8">
+        <table class="table">
+          <thead>
+            <tr>
+              <th>No.</th>
+              <th>Customer ID</th>
+              <th>Dependent ID</th>
+            </tr>
+          </thead>
+          <tbody id="customersTable">
+          </tbody>
+        </table>
+      </div>
+      <div class="col-md-2"></div>
+    </div><br /><br /><br />
+
+    <br/>
+    <h4>Shared claims</h4><br/><br/>
+
+    <div class="row">
+      <div class="col-md-1"></div>
+      <div class="col-md-11">
+        <form class="form-inline">
+          <div class="form-group">
+            <label for="custNum">Enter customer no.: </label>
+            <input type="number" class="form-control" id="custNum" name="custNum">
+          </div>
+          <button type="button" class="btn btn-primary" onclick="App.corpDisplaySharedClaims(); return false;">View 
+            shared claims</button>
+        </form>
+      </div>
+    </div><br /><br /><br />
+
+    <p id="custAddress">Customer ID: </p><br/>
+    <div class="row">
+      <div class="col-md-12">
+        <table class="table">
+          <thead>
+            <tr>
+              <th>Description</th>
+              <th>Expiry date</th>
+              <th>Verified</th>
+              <th>Verifier name</th>
+              <th>Verifier ID</th>
+              <th>Data ID</th>
+            </tr>
+          </thead>
+          <tbody id="sharedClaimsTable">
+          </tbody>
+        </table>
+      </div>
+    </div><br /><br /><br />
+
+    <div class="row">
+      <div class="col-md-1"></div>
+      <div class="col-md-11">
+        <p>
+          <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#formSFP">Add
+            Single Funeral Plan</button>
+          <span class="sizer"></span>
+          <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#formFFP">Add
+            Family Funeral Plan</button>
+        </p>
+      </div>
+    </div><br /><br/>
+  </div>
+  <!-- Insurer section ends. -->
+
+  <!-- Modal form to create claim for proof of Single Funeral Plan. -->
+  <div id="formSFP" class="modal fade" role="dialog">
+    <div class="modal-dialog">
+      <div class="modal-content">
+        <div class="modal-header">
+          <button type="button" class="close" data-dismiss="modal">&times;</button>
+          <h4 class="modal-title">Add Single Funeral Plan</h4>
+        </div>
+        <div class="modal-body">
+          <form>
+            <div class="form-group">
+              <label for="custNum2">Enter customer no.: </label>
+              <input type="number" class="form-control" id="custNum2" name="custNum2">
+            </div>
+            <div class="form-group">
+              <label for="prem">Premium: </label>
+              <input type="number" class="form-control" id="prem" name="prem" value=30>
+            </div>
+            <div class="form-group">
+              <label for="cover">Cover amount: </label>
+              <input type="number" class="form-control" id="cover" name="cover" value=20000>
+            </div>
+            <div class="form-group">
+              <label for="sun">Sundries benefit: </label>
+              <input type="number" class="form-control" id="sun" name="sun" value=1000>
+            </div>
+            <div class="form-group">
+              <label for="legal">Legal advice: </label>
+              <input type="text" class="form-control" id="legal" name="legal" value="Yes">
+            </div>
+            <div class="form-group">
+              <label for="wait">Waiting period (days): </label>
+              <input type="number" class="form-control" id="wait" name="wait" value=30>
+            </div>
+            <div class="form-group">
+              <label for="payhol">Payment holiday: </label>
+              <input type="text" class="form-control" id="payhol" name="payhol" value="1 per yr">
+            </div>
+            <div class="form-group">
+              <label for="payback">Premium payback: </label>
+              <input type="text" class="form-control" id="payback" name="payback" value="5 after 5 yrs">
+            </div>
+          </form>
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-success" data-dismiss="modal" 
+            onclick="App.corpCreateFuneralPlan(1); return false;">Add claim</button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Modal form to create claim for proof of Family Funeral Plan. -->
+  <div id="formFFP" class="modal fade" role="dialog">
+    <div class="modal-dialog">
+      <div class="modal-content">
+        <div class="modal-header">
+          <button type="button" class="close" data-dismiss="modal">&times;</button>
+          <h4 class="modal-title">Add Family Funeral Plan</h4>
+        </div>
+        <div class="modal-body">
+          <form>
+            <div class="form-group">
+              <label for="custNum3">Enter customer no.: </label>
+              <input type="number" class="form-control" id="custNum3" name="custNum3">
+            </div>
+            <div class="form-group">
+              <label for="prem2">Premium: </label>
+              <input type="number" class="form-control" id="prem2" name="prem2" value=50>
+            </div>
+            <div class="form-group">
+              <label for="cover2">Cover amount: </label>
+              <input type="number" class="form-control" id="cover2" name="cover2" value=30000>
+            </div>
+            <div class="form-group">
+              <label for="sun2">Sundries benefit: </label>
+              <input type="number" class="form-control" id="sun2" name="sun2" value=2000>
+            </div>
+            <div class="form-group">
+              <label for="legal2">Legal advice: </label>
+              <input type="text" class="form-control" id="legal2" name="legal2" value="Yes">
+            </div>
+            <div class="form-group">
+              <label for="wait2">Waiting period (days): </label>
+              <input type="number" class="form-control" id="wait2" name="wait2" value=30>
+            </div>
+            <div class="form-group">
+              <label for="payhol2">Payment holiday: </label>
+              <input type="text" class="form-control" id="payhol2" name="payhol2" value="1 per yr">
+            </div>
+            <div class="form-group">
+              <label for="payback2">Premium payback: </label>
+              <input type="text" class="form-control" id="payback2" name="payback2" value="5 after 5 yrs">
+            </div>
+          </form>
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-success" data-dismiss="modal" 
+            onclick="App.corpCreateFuneralPlan(2); return false;">Add claim</button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <footer>
+      <p class="text-center">Created by Jo Moodley | 2018 | <a href="https://github.com/JoMoodley/Identity">
+        GitHub project</a></p>
+  </footer>
+
+  <!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
+  <!-- Plugins -->
+  <script src="js/bootstrap.min.js"></script>
+  <script src="js/web3.min.js"></script>
+  <script src="js/truffle-contract.js"></script>
+
+  <!-- App JavaScript -->
+  <script src="js/app.js"></script>
+</body>
+
+</html>
