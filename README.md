@@ -32,44 +32,44 @@ Note that there can be issues with the browser not automatically refreshing the 
 
 ##### Set up the application
 
-Step 1a. Download the truffle project. If your operating system is Linux, rename `truffle-config.js` to `truffle.js`. Open the terminal and proceed to the relevant directory. Run `npm install` to install any package dependencies.
+*Step 1a*. Download the truffle project. If your operating system is Linux, rename `truffle-config.js` to `truffle.js`. Open the terminal and proceed to the relevant directory. Run `npm install` to install any package dependencies.
 
-Step 1b. Open Ganache. Log in to MetaMask and select the local network. Add accounts 0 to 3 from Ganache to the wallet using the public and private keys in Ganache. If accounts are already added, ensure that there are no historical transactions by resetting the accounts.
+*Step 1b*. Open Ganache. Log in to MetaMask and select the local network. Add accounts 0 to 3 from Ganache to the wallet using the public and private keys in Ganache. If accounts are already added, ensure that there are no historical transactions by resetting the accounts.
 
-Step 1c. Run `truffle migrate --reset` or similar. The contracts should compile and deploy from account 0 in Ganache. Then execute `npm run dev`. The application opens in the browser.
+*Step 1c*. Run `truffle migrate --reset` or similar. The contracts should compile and deploy from account 0 in Ganache. Then execute `npm run dev`. The application opens in the browser.
 
 ##### Create identities
 
-Step 2. From account 0 in the wallet, select the option to create an identity for government and pay for the transaction. Similarly, from wallet accounts 1 to 3, create identities for the insurer, customer and his relative. 
+*Step 2*. From account 0 in the wallet, select the option to create an identity for government and pay for the transaction. Similarly, from wallet accounts 1 to 3, create identities for the insurer, customer and his relative. 
 
 ##### Create and verify identity claims
 
-Step 3a. Log in as customer and create claims for national identity, residential address and age.
+*Step 3a.* Log in as customer and create claims for national identity, residential address and age.
 
-Step 3b. Log in as relative and create claim for national identity.
+*Step 3b.* Log in as relative and create claim for national identity.
 
-Step 3c. Log in as government, view and verify all claims.
+*Step 3c.* Log in as government, view and verify all claims.
 
-Step 3d. Log in as customer or relative and view verified claims.
+*Step 3d.* Log in as customer or relative and view verified claims.
 
 ##### Demonstrate the use case
 
 ###### Customer applies for Single Funeral Plan from Youth Markets
 
-Step 4a. Log in as customer. Sign up to the insurer. Share all 3 claims.
+*Step 4a.* Log in as customer. Sign up to the insurer. Share all 3 claims.
 
-Step 4b. Log in as insurer. View customer has been added. Select to view customer's shared claims. Issue claim on Single Funeral Plan to customer. Customer's shared claims are updated.
+*Step 4b.* Log in as insurer. View customer has been added. Select to view customer's shared claims. Issue claim on Single Funeral Plan to customer. Customer's shared claims are updated.
 
-Step 4c. Log in as customer. View Single Funeral Plan claim.
+*Step 4c.* Log in as customer. View Single Funeral Plan claim.
 
 ###### Customer applies for Family Funeral Plan from Family Markets
 
-Step 5a. Log in as customer. Add dependent (account 3).
+*Step 5a.* Log in as customer. Add dependent (account 3).
 
-Step 5b. Log in as relative. Sign up to the insurer. Share claim.
+*Step 5b.* Log in as relative. Sign up to the insurer. Share claim.
 
-Step 5c. Log in as insurer. View that customer has added a dependent and relative has been added as a customer. Select to view relative's shared claims. Select to view customer's shared claims. Issue claim on Family Funeral Plan to customer. Customer's shared claims are updated.
+*Step 5c.* Log in as insurer. View that customer has added a dependent and relative has been added as a customer. Select to view relative's shared claims. Select to view customer's shared claims. Issue claim on Family Funeral Plan to customer. Customer's shared claims are updated.
 
-Step 5d. Log in as customer. View Family Funeral Plan claim.
+*Step 5d.* Log in as customer. View Family Funeral Plan claim.
 
 ----------
