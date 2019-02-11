@@ -36,7 +36,18 @@ Note that there can be issues with the browser not automatically refreshing the 
 
 *Step 1b*. Open Ganache. Log in to MetaMask and select the local network. Add accounts 0 to 3 from Ganache to the wallet using the public and private keys in Ganache. If accounts are already added, ensure that there are no historical transactions by resetting the accounts.
 
-*Step 1c*. Run `truffle migrate --reset` or similar. The contracts should compile and deploy from account 0 in Ganache. Then execute `npm run dev`. The application opens in the browser.
+*Step 1c*. Run 
+
+```
+truffle migrate --reset
+``` 
+
+or similar. The contracts should compile and deploy from account 0 in Ganache. Then execute 
+
+```
+npm run dev
+```
+The application opens in the browser.
 
 ##### Create identities
 
